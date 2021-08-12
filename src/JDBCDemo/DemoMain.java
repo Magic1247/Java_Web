@@ -1,6 +1,7 @@
 package JDBCDemo;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DemoMain {
     public static void main(String[] args) {
@@ -22,8 +23,16 @@ public class DemoMain {
             // 使用executeQuery方法执行DQL查询语句
             resultSet = statement.executeQuery(querySql);
             // 如果游标未在最后一行，获取当前行数据并创建DemoDBPerson对象打印对象信息
+            ArrayList<DemoDBPerson> list = new ArrayList<>();
             while (resultSet.next()) {
-                System.out.println(new DemoDBPerson(resultSet.getInt(1), resultSet.getString(2), resultSet.getInt(3), resultSet.getInt(4)));
+                DemoDBPerson a =new DemoDBPerson(resultSet.getInt(1),
+                                                resultSet.getString(2),
+                                                resultSet.getInt(3),
+                                                resultSet.getInt(4));
+                list.add(a);
+            }
+            for (DemoDBPerson demoDBPerson : list) {
+                System.out.println(demoDBPerson);
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
